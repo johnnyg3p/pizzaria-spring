@@ -1,5 +1,7 @@
 package br.com.reload.pizzaria.controladores;
 
+import br.com.reload.pizzaria.modelos.repositorios.PizzaRepositorio;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/pizzas")
 public class PizzaController {
 
-    public PizzaController(){
-        System.out.print("Criou a pizza controller");
-    }
+    @Autowired private PizzaRepositorio pizzaRepositorio;
 
-    @RequestMapping("/ola/{nome}")
+    @RequestMapping("/quantas")
     @ResponseBody
-    public String ola (@PathVariable String nome){
-        return "olá " +nome;
+    public String quantasPizzas (){
+        return "Atualmente há "+ pizzaRepositorio.count() + " Cadastradas";
     }
 }
